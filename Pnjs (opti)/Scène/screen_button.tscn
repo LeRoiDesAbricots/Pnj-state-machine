@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxjsjygjqoyxh"]
+
+[ext_resource type="Script" path="res://Script/screen_button.gd" id="1_nronc"]
+[ext_resource type="Texture2D" uid="uid://35beahrrt2c2" path="res://icon.svg" id="1_wpf52"]
+
+[node name="Screen_button" type="Node2D"]
+script = ExtResource("1_nronc")
+
+[node name="Explode_mode" type="TouchScreenButton" parent="."]
+position = Vector2(0, 464)
+scale = Vector2(2.5, 0.4375)
+texture_normal = ExtResource("1_wpf52")
+action = "explode_mode"
+
+[node name="Normal_mode" type="TouchScreenButton" parent="."]
+position = Vector2(0, 520)
+scale = Vector2(2.5, 0.4375)
+texture_normal = ExtResource("1_wpf52")
+action = "normal_mode"

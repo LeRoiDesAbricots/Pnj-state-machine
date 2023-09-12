@@ -1,0 +1,130 @@
+[gd_scene load_steps=12 format=3 uid="uid://d36gdd1jxaype"]
+
+[ext_resource type="PackedScene" uid="uid://c0w8ri0hk886t" path="res://Scène/pnj.tscn" id="1_fnp3c"]
+[ext_resource type="Texture2D" uid="uid://cpkk5gm1tujgc" path="res://Sprite/Police.png" id="2_wqyei"]
+[ext_resource type="Script" path="res://Script/agent.gd" id="2_wtjhg"]
+[ext_resource type="Script" path="res://Script/Shooting.gd" id="4_d16ns"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t72tq"]
+size = Vector2(48, 60)
+
+[sub_resource type="Animation" id="Animation_kf1dk"]
+resource_name = "Idle_agent1"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+
+[sub_resource type="Animation" id="Animation_8t71s"]
+resource_name = "Panic_agent1"
+length = 0.35
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.175, 0.275),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [17, 18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_5dygf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+
+[sub_resource type="Animation" id="Animation_v7kxc"]
+resource_name = "Run_agent1"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [14, 15, 16]
+}
+
+[sub_resource type="Animation" id="Animation_5pfds"]
+resource_name = "Shoot_agent1"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [21, 22, 23, 24]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cs8r4"]
+_data = {
+"Idle_agent1": SubResource("Animation_kf1dk"),
+"Panic_agent1": SubResource("Animation_8t71s"),
+"RESET": SubResource("Animation_5dygf"),
+"Run_agent1": SubResource("Animation_v7kxc"),
+"Shoot_agent1": SubResource("Animation_5pfds")
+}
+
+[node name="agent" instance=ExtResource("1_fnp3c")]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("2_wtjhg")
+initial_speed = 12.5
+initial_sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_wqyei")
+hframes = 13
+vframes = 2
+frame = 14
+
+[node name="agent_collision" type="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_t72tq")
+
+[node name="StateMachine" parent="." index="2"]
+Shake_decay_rate = 100.0
+Noise_shake_strength = 30.0
+
+[node name="Shooting" type="Node" parent="StateMachine" index="3"]
+script = ExtResource("4_d16ns")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_cs8r4")
+}

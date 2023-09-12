@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxq8lbl582lxa"]
+
+[ext_resource type="PackedScene" uid="uid://ck5t3flodyr05" path="res://Scène/normal_pnj.tscn" id="1_8obro"]
+[ext_resource type="Texture2D" uid="uid://35beahrrt2c2" path="res://icon.svg" id="2_bibji"]
+[ext_resource type="PackedScene" uid="uid://d36gdd1jxaype" path="res://Scène/agent.tscn" id="3_gnu7l"]
+[ext_resource type="PackedScene" uid="uid://cmbr2jr7p151g" path="res://Scène/player.tscn" id="4_xyrqi"]
+[ext_resource type="PackedScene" uid="uid://cxjsjygjqoyxh" path="res://Scène/screen_button.tscn" id="5_sbc8h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ccn8x"]
+size = Vector2(128, 128)
+
+[node name="World" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(512, 440)
+scale = Vector2(7.88, 1)
+collision_layer = 3
+collision_mask = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("2_bibji")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_ccn8x")
+
+[node name="Player" parent="." instance=ExtResource("4_xyrqi")]
+position = Vector2(200, 312)
+
+[node name="agent" parent="." instance=ExtResource("3_gnu7l")]
+position = Vector2(632, 346)
+
+[node name="normal_pnj2" parent="." instance=ExtResource("1_8obro")]
+position = Vector2(824, 352)
+
+[node name="normal_pnj" parent="." instance=ExtResource("1_8obro")]
+position = Vector2(736, 352)
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
+anchor_mode = 0
+
+[node name="Screen_button" parent="Camera2D" instance=ExtResource("5_sbc8h")]
