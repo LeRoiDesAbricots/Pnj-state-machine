@@ -31,7 +31,7 @@ func _ready() -> void:
 	state.enter() # On entre dans la state initiale
 
 func _physics_process(delta: float) -> void:
-	new_shake._process(delta)
+	#new_shake._process(delta)
 	state.update(delta)
 
 # Fonction qui permet de changer de state, avec la state cible et le message

@@ -9,6 +9,8 @@ func enter(_msg := {}) -> void:
 	
 	escape_timer.start()
 	
+func update(delta: float) -> void:
+	state_machine.new_shake._process(delta)
 
 func rigidbody_process(_s: PhysicsDirectBodyState2D, velocity: Vector2) -> void:
 	
